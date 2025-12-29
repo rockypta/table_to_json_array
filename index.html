@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table to JSON Array</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Table to JSON Array Converter</h1>
+        
+        <div class="grid-container">
+            <div class="grid-item">
+                <h2>1. Paste Table Data</h2>
+                <textarea id="paste_area" placeholder="Paste your flat file table data here..."></textarea>
+            </div>
+
+            <div class="grid-item">
+                <h2>2. Define Parsing Logic</h2>
+                <p>Use a regular expression to capture columns. Example for CSV: `/(.*?),(.*?),(.*)/`</p>
+                <input type="text" id="parsing_logic" placeholder="e.g., /(.*?),(.*?),(.*)/">
+            </div>
+
+            <div class="grid-item">
+                <h2>3. Map Columns to Fields</h2>
+                <p>One per line, format: `capture_group_index:fieldName`. Example: `1:name`</p>
+                <textarea id="column_mapping" placeholder="1:id
+2:name
+3:email"></textarea>
+            </div>
+
+            <div class="grid-item">
+                <h2>4. Provide JSON Template</h2>
+                <p>Use mapped field names as placeholders, e.g., `{id}`.</p>
+                <textarea id="json_template" placeholder='{
+  "id": "{id}",
+  "name": "{name}",
+  "contact": {
+    "email": "{email}"
+  }
+}'></textarea>
+            </div>
+        </div>
+
+        <button id="generate_button">Generate JSON</button>
+
+        <h2>Resulting JSON Array</h2>
+        <pre id="output_area"></pre>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
