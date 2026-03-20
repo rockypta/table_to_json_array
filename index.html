@@ -17,7 +17,14 @@
             </div>
 
             <div class="grid-item full-width">
-                <h2>2. Map Fields</h2>
+                <div class="header-with-actions">
+                    <h2>2. Map Fields</h2>
+                    <div class="actions">
+                        <button id="export_button" class="action-button">Export Config</button>
+                        <button id="import_button_trigger" class="action-button">Import Config</button>
+                        <input type="file" id="import_input" style="display: none;" accept=".json,.txt">
+                    </div>
+                </div>
                 <p>Define how to extract each field from the table data rows.</p>
                 <table id="mapping_table">
                     <thead>

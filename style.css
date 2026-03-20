@@ -126,6 +126,35 @@ textarea#paste_area {
     background-color: #2980b9;
 }
 
+.header-with-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #e0e0e0;
+    margin-bottom: 1rem;
+}
+
+.header-with-actions h2 {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.action-button {
+    background-color: #9b59b6;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+}
+
+.action-button:hover {
+    background-color: #8e44ad;
+}
+
 .result-header {
     display: flex;
     justify-content: space-between;
