@@ -27,15 +27,12 @@ Define your extraction rules in the table:
 - **Field Name**: The key used in your JSON template (e.g., `id`).
 
 ### 3. Provide JSON Template
-Create a JSON structure using your field names as placeholders:
-```json
-{
-  "user_id": "{id}",
-  "details": {
-    "name": "{name}"
-  }
-}
-```
+Create a JSON structure using your field names as placeholders. The tool supports:
+- **Single Object**: `{ "id": "{id}", "name": "{name}" }`
+- **JSON Array**: `[ { "type": "id", "val": "{id}" }, { "type": "name", "val": "{name}" } ]`
+- **Multiple Objects**: `{ "id": "{id}" }, { "name": "{name}" }` (automatically wrapped and flattened)
+
+Any array or multiple objects provided will be flattened into the final resulting array.
 
 ### 4. Generate & Copy
 Click **Generate JSON** to see the result. Use the **Copy JSON** button to grab the final array.

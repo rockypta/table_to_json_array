@@ -216,7 +216,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Attempt to parse the resulting string as JSON
                 try {
-                    jsonArray.push(JSON.parse(populatedTemplate));
+                    let result;
+                    try {
+                        result = JSON.parse(populatedTemplate);
+                    } catch (e) {
+                        // Fallback: try wrapping in brackets to support multiple comma-separated objects
+                        try {
+                            result = JSON.parse(`[${populatedTemplate}]`);
+                        } catch (e2) {
+                            throw e; // Rethrow original error if fallback also fails
+                        }
+                    }
+
+                    if (Array.isArray(result)) {
+                        jsonArray.push(...result);
+                    } else {
+                        jsonArray.push(result);
+                    }
                 } catch (e) {
                     console.warn(`Could not parse JSON for a row. Resulting template string: ${populatedTemplate}`);
                 }

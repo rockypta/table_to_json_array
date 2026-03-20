@@ -44,14 +44,11 @@
 
             <div class="grid-item">
                 <h2>3. Provide JSON Template</h2>
-                <p>Use mapped field names as placeholders, e.g., `{id}`.</p>
-                <textarea id="json_template" placeholder='{
-  "id": "{id}",
-  "name": "{name}",
-  "contact": {
-    "email": "{email}"
-  }
-}'></textarea>
+                <p>Use placeholders like `{name}`. You can also provide an array of objects for multiple items per row.</p>
+                <textarea id="json_template" placeholder='[
+  { "id": "{id}", "type": "header" },
+  { "id": "{id}", "name": "{name}", "type": "record" }
+]'></textarea>
             </div>
         </div>
 
