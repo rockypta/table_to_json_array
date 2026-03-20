@@ -34,11 +34,62 @@ p {
     gap: 2rem;
 }
 
+.full-width {
+    grid-column: 1 / -1;
+}
+
 .grid-item {
     background: #fff;
     padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+#mapping_table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+#mapping_table th, #mapping_table td {
+    padding: 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+#mapping_table select, #mapping_table input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 0.9rem;
+}
+
+.remove_row {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.remove_row:hover {
+    background-color: #c0392b;
+}
+
+.secondary-button {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.secondary-button:hover {
+    background-color: #27ae60;
 }
 
 textarea, input[type="text"] {
