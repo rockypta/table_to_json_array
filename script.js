@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const jsonTemplateInput = document.getElementById('json_template');
     const generateButton = document.getElementById('generate_button');
     const outputArea = document.getElementById('output_area');
+    const copyButton = document.getElementById('copy_button');
 
     // Function to add a new row to the mapping table
     function addRow(searchFrom = 'next_cell', regex = '', fieldName = '') {
@@ -33,6 +34,59 @@ document.addEventListener('DOMContentLoaded', () => {
     mappingBody.addEventListener('click', (e) => {
         if (e.target.classList.contains('remove_row')) {
             e.target.closest('tr').remove();
+        }
+    });
+
+    // Event listener for copying output
+    copyButton.addEventListener('click', () => {
+        const text = outputArea.textContent;
+        if (!text || text.startsWith('Error:')) return;
+
+        function updateButton() {
+            const originalText = copyButton.textContent;
+            copyButton.textContent = 'Copied!';
+            copyButton.style.backgroundColor = '#27ae60';
+            setTimeout(() => {
+                copyButton.textContent = originalText;
+                copyButton.style.backgroundColor = '';
+            }, 2000);
+        }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(updateButton).catch(err => {
+                console.error('navigator.clipboard failed, trying fallback...', err);
+                fallbackCopyTextToClipboard(text);
+            });
+        } else {
+            fallbackCopyTextToClipboard(text);
+        }
+
+        function fallbackCopyTextToClipboard(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            
+            // Avoid scrolling to bottom
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.position = "fixed";
+            textArea.style.opacity = "0";
+
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    updateButton();
+                } else {
+                    console.error('Fallback: Copy command was unsuccessful');
+                }
+            } catch (err) {
+                console.error('Fallback: Oops, unable to copy', err);
+            }
+
+            document.body.removeChild(textArea);
         }
     });
 
