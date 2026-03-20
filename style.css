@@ -30,12 +30,8 @@ p {
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: 1fr;
     gap: 2rem;
-}
-
-.full-width {
-    grid-column: 1 / -1;
 }
 
 .grid-item {
