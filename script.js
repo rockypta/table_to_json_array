@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const exportButton = document.getElementById('export_button');
     const importButtonTrigger = document.getElementById('import_button_trigger');
     const importInput = document.getElementById('import_input');
+    const autoTemplateButton = document.getElementById('auto_template_button');
 
     // Function to add a new row to the mapping table
     function addRow(regex = '', fieldName = '') {
@@ -26,6 +27,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event listener for adding rows
     addRowButton.addEventListener('click', () => addRow());
+
+    // Event listener for auto-generating JSON template
+    autoTemplateButton.addEventListener('click', () => {
+        const rows = mappingBody.querySelectorAll('tr');
+        const templateObj = {};
+        
+        rows.forEach(row => {
+            const fieldName = row.querySelector('.field_name').value.trim();
+            if (fieldName) {
+                templateObj[fieldName] = `{${fieldName}}`;
+            }
+        });
+
+        if (Object.keys(templateObj).length === 0) {
+            alert('Add at least one field mapping with a name first.');
+            return;
+        }
+
+        jsonTemplateInput.value = JSON.stringify(templateObj, null, 2);
+    });
 
     // Event listener for exporting configuration
     exportButton.addEventListener('click', () => {

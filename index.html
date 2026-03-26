@@ -42,7 +42,10 @@
             </div>
 
             <div class="grid-item">
-                <h2>3. Provide JSON Template</h2>
+                <div class="header-with-actions">
+                    <h2>3. Provide JSON Template</h2>
+                    <button id="auto_template_button" class="action-button">Auto-generate Template</button>
+                </div>
                 <p>Use placeholders like `{name}`. You can also provide an array of objects for multiple items per row.</p>
                 <textarea id="json_template" placeholder='[
   { "id": "{id}", "type": "header" },
