@@ -11,16 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const importInput = document.getElementById('import_input');
 
     // Function to add a new row to the mapping table
-    function addRow(searchFrom = 'next_cell', regex = '', fieldName = '') {
+    function addRow(regex = '', fieldName = '') {
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>
-                <select class="search_from">
-                    <option value="next_cell" ${searchFrom === 'next_cell' ? 'selected' : ''}>next cell</option>
-                    <option value="from_beginning" ${searchFrom === 'from_beginning' ? 'selected' : ''}>from beginning</option>
-                </select>
-            </td>
-            <td><input type="text" class="regex" value="${regex}" placeholder="e.g., ID: (\\d+)"></td>
+            <td><input type="text" class="regex" value="${regex}" placeholder="e.g., (\\w+)"></td>
             <td><input type="text" class="field_name" value="${fieldName}" placeholder="id"></td>
             <td><button class="remove_row">Remove</button></td>
         `;
@@ -28,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Add initial row
-    addRow('from_beginning', 'ID: (\\d+)', 'id');
+    addRow('(\\w+)', 'field1');
 
     // Event listener for adding rows
     addRowButton.addEventListener('click', () => addRow());
@@ -39,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const rows = mappingBody.querySelectorAll('tr');
         rows.forEach(row => {
             mappings.push({
-                searchFrom: row.querySelector('.search_from').value,
                 regex: row.querySelector('.regex').value,
                 fieldName: row.querySelector('.field_name').value.trim()
             });
@@ -77,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Add new mappings
                 config.mappings.forEach(m => {
-                    addRow(m.searchFrom, m.regex, m.fieldName);
+                    addRow(m.regex, m.fieldName);
                 });
 
                 // Update template
@@ -164,12 +157,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const mappings = [];
             const rows = mappingBody.querySelectorAll('tr');
             rows.forEach(row => {
-                const searchFrom = row.querySelector('.search_from').value;
                 const regexStr = row.querySelector('.regex').value;
                 const fieldName = row.querySelector('.field_name').value.trim();
                 
                 if (regexStr && fieldName) {
-                    mappings.push({ searchFrom, regex: new RegExp(regexStr), fieldName });
+                    mappings.push({ regex: new RegExp(regexStr), fieldName });
                 }
             });
 
@@ -189,10 +181,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const rowData = {};
 
                 for (const mapping of mappings) {
-                    if (mapping.searchFrom === 'from_beginning') {
-                        currentPosition = 0;
-                    }
-
                     const substring = line.substring(currentPosition);
                     const match = substring.match(mapping.regex);
 

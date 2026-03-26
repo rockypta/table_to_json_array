@@ -4,7 +4,7 @@ A powerful, browser-based utility for extracting structured data from flat files
 
 ## Features
 
-- **Sequential Regex Matching**: Extract multiple fields from a single line by searching from the start of the line or from where the last match ended.
+- **Sequential Regex Matching**: Extract multiple fields from a single line by searching from where the last match ended.
 - **Dynamic Field Mapping**: Add as many fields as needed with custom Regex patterns and field names.
 - **Capture Group Support**: Automatically extracts data from the first capture group `()` if present, or the whole match.
 - **Custom JSON Templating**: Define exactly how your output should look using `{placeholder}` syntax.
@@ -19,11 +19,9 @@ Paste your raw data (CSV, logs, fixed-width text, etc.) into the first section. 
 
 ### 2. Map Fields
 Define your extraction rules in the table:
-- **Search From**: 
-    - `next cell`: Starts searching from the end of the previous field's match. Ideal for sequential data like CSVs.
-    - `from beginning`: Resets the search pointer to the start of the line. Useful for extracting multiple pieces of data that might appear in any order.
 - **Regular Expression**: Enter a JavaScript-compatible regex. 
-    - *Example*: `ID: (\d+)` will extract only the numbers.
+    - *Example*: `(\w+)` will extract the first word.
+    - The tool searches sequentially; each field starts searching from where the previous match ended.
 - **Field Name**: The key used in your JSON template (e.g., `id`).
 
 ### 3. Provide JSON Template

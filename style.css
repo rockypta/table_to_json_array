@@ -45,12 +45,30 @@ p {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 1rem;
+    table-layout: fixed; /* Ensures specified widths are respected */
 }
 
 #mapping_table th, #mapping_table td {
     padding: 0.8rem;
     text-align: left;
     border-bottom: 1px solid #eee;
+}
+
+/* Specific column widths */
+#mapping_table th:nth-child(1),
+#mapping_table td:nth-child(1) {
+    width: 60%;
+}
+
+#mapping_table th:nth-child(2),
+#mapping_table td:nth-child(2) {
+    width: 25%;
+}
+
+#mapping_table th:nth-child(3),
+#mapping_table td:nth-child(3) {
+    width: 15%;
+    text-align: center;
 }
 
 #mapping_table select, #mapping_table input {
